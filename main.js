@@ -10,6 +10,9 @@ const lastDrawTime = document.querySelector("#last-draw-time");
 const numberBalls = document.querySelector("#number-balls");
 const bonusBall = document.querySelector("#bonus-ball");
 const historyList = document.querySelector("#history-list");
+const partnershipForm = document.querySelector("#partnership-form");
+const submitButton = document.querySelector("#submit-button");
+const formStatus = document.querySelector("#form-status");
 
 const history = loadHistory();
 let totalDraws = history.length;
@@ -152,9 +155,45 @@ function clearHistory() {
   renderHistory();
 }
 
+async function handlePartnershipSubmit(event) {
+  event.preventDefault();
+
+  const formData = new FormData(partnershipForm);
+
+  submitButton.disabled = true;
+  submitButton.textContent = "전송 중...";
+  formStatus.textContent = "문의 내용을 전송하고 있습니다.";
+  formStatus.dataset.state = "pending";
+
+  try {
+    const response = await fetch(partnershipForm.action, {
+      method: "POST",
+      body: formData,
+      headers: {
+        Accept: "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error("submit_failed");
+    }
+
+    partnershipForm.reset();
+    formStatus.textContent = "문의가 접수됐습니다. 확인 후 연락드리겠습니다.";
+    formStatus.dataset.state = "success";
+  } catch {
+    formStatus.textContent = "전송에 실패했습니다. 잠시 후 다시 시도해주세요.";
+    formStatus.dataset.state = "error";
+  } finally {
+    submitButton.disabled = false;
+    submitButton.textContent = "문의 보내기";
+  }
+}
+
 drawButton.addEventListener("click", runDraw);
 redrawButton.addEventListener("click", runDraw);
 clearHistoryButton.addEventListener("click", clearHistory);
+partnershipForm.addEventListener("submit", handlePartnershipSubmit);
 
 renderHistory();
 

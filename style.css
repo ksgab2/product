@@ -39,6 +39,12 @@ body::before {
   pointer-events: none;
 }
 
+input,
+textarea,
+button {
+  font: inherit;
+}
+
 .shell {
   width: min(1100px, calc(100% - 32px));
   margin: 0 auto;
@@ -94,7 +100,8 @@ h1 {
   line-height: 0.92;
 }
 
-.lead {
+.lead,
+.contact-lead {
   max-width: 620px;
   margin: 18px 0 0;
   font-size: 1.05rem;
@@ -113,10 +120,9 @@ button {
   border: 0;
   border-radius: 999px;
   padding: 14px 22px;
-  font: inherit;
   font-weight: 800;
   cursor: pointer;
-  transition: transform 160ms ease, box-shadow 160ms ease, background-color 160ms ease;
+  transition: transform 160ms ease, box-shadow 160ms ease, background-color 160ms ease, opacity 160ms ease;
 }
 
 button:hover {
@@ -125,6 +131,11 @@ button:hover {
 
 button:active {
   transform: translateY(1px);
+}
+
+button:disabled {
+  cursor: wait;
+  opacity: 0.72;
 }
 
 .primary {
@@ -298,6 +309,81 @@ h2 {
   text-align: center;
 }
 
+.contact-panel {
+  display: grid;
+  grid-template-columns: 0.82fr 1.18fr;
+  gap: 24px;
+  align-items: start;
+  margin-top: 20px;
+}
+
+.contact-copy {
+  max-width: 360px;
+}
+
+.contact-form {
+  display: grid;
+  gap: 14px;
+}
+
+.field {
+  display: grid;
+  gap: 8px;
+}
+
+.field span {
+  font-weight: 700;
+}
+
+.field input,
+.field textarea {
+  width: 100%;
+  border: 1px solid rgba(23, 17, 15, 0.15);
+  border-radius: 18px;
+  padding: 14px 16px;
+  color: var(--ink);
+  background: rgba(255, 255, 255, 0.8);
+  outline: none;
+  transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.field input:focus,
+.field textarea:focus {
+  border-color: rgba(229, 91, 45, 0.55);
+  box-shadow: 0 0 0 4px rgba(229, 91, 45, 0.12);
+}
+
+.field textarea {
+  resize: vertical;
+  min-height: 140px;
+}
+
+.contact-actions {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+
+.form-status {
+  margin: 0;
+  min-height: 24px;
+  color: var(--muted);
+}
+
+.form-status[data-state="pending"] {
+  color: #9b5d10;
+}
+
+.form-status[data-state="success"] {
+  color: #1f7a50;
+}
+
+.form-status[data-state="error"] {
+  color: #c13c3c;
+}
+
 @keyframes rise-in {
   from {
     transform: translateY(20px) scale(0.92);
@@ -329,7 +415,9 @@ h2 {
 
   .board-header,
   .panel-top,
-  .history-top {
+  .history-top,
+  .contact-panel,
+  .contact-actions {
     grid-template-columns: 1fr;
     display: grid;
   }
@@ -344,5 +432,9 @@ h2 {
 
   .panel-grid {
     grid-template-columns: 1fr;
+  }
+
+  .contact-copy {
+    max-width: none;
   }
 }
