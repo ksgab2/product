@@ -384,6 +384,27 @@ h2 {
   color: #c13c3c;
 }
 
+.comments-panel {
+  display: grid;
+  gap: 18px;
+  margin-top: 20px;
+}
+
+.comments-copy {
+  max-width: 620px;
+}
+
+.comments-box {
+  padding: 18px;
+  border: 1px solid rgba(23, 17, 15, 0.1);
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.72);
+}
+
+#disqus_thread {
+  min-height: 180px;
+}
+
 @keyframes rise-in {
   from {
     transform: translateY(20px) scale(0.92);

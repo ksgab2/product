@@ -114,8 +114,39 @@
         </div>
       </form>
     </section>
+
+    <section class="panel comments-panel">
+      <div class="comments-copy">
+        <p class="label">Community</p>
+        <h2>댓글</h2>
+        <p class="contact-lead">
+          번호 조합 후기나 의견을 남겨보세요. Disqus 댓글이 아래에 연결됩니다.
+        </p>
+      </div>
+      <div class="comments-box">
+        <div id="disqus_thread"></div>
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </section>
   </main>
 
   <script defer src="./main.js"></script>
+  <script>
+    var disqus_config = function () {
+      this.page.url = window.location.href;
+      this.page.identifier = "lotto-home";
+    };
+
+    (function() {
+      var d = document;
+      var s = d.createElement('script');
+      s.src = 'https://product1-1-1.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
 </body>
 </html>
